@@ -1,58 +1,79 @@
-# Phase 2 – IP Configuration and DNS Resolution
+# Phase 2 – IP Configuration, Routing and DNS Resolution
 
 ## Objective
 
-Inspect the Windows network configuration, routing information, DNS resolution, and basic connectivity.
+Inspect IP configuration, routing information, DNS resolution, and basic connectivity on Windows and Kali Linux.
 
-## 1. IP Configuration
+## Windows
 
-The Windows network configuration was inspected using `ipconfig /all`.
+### IP Configuration
 
 The active Wi-Fi adapter was configured with:
 
-- IPv4 address: `192.168.0.127`
+- IPv4: `192.168.0.127`
 - Subnet mask: `255.255.255.0`
 - Default gateway: `192.168.0.1`
 - DHCP server: `192.168.0.1`
 - DNS server: `192.168.0.1`
 
-A VirtualBox Host-Only adapter was also present with the network `192.168.56.0/24`.
+A VirtualBox Host-Only network `192.168.56.0/24` was also present.
 
-## 2. Routing Table
+### Routing Table
 
-The routing table was inspected using `route print`.
+The default IPv4 route used gateway `192.168.0.1`.
 
-The default IPv4 route uses:
+### DNS Resolution
 
-- Gateway: `192.168.0.1`
-- Interface: `192.168.0.127`
+`nslookup google.com` successfully resolved the domain.
 
-A separate local route was also present for the VirtualBox Host-Only network `192.168.56.0/24`.
+DNS server: `192.168.0.1`
 
-## 3. DNS Resolution
+Resolved IPv4 address included:
 
-The `nslookup google.com` command successfully resolved the domain.
+`142.251.142.142`
 
-DNS server:
+### Connectivity Test
 
-`192.168.0.1`
-
-Resolved addresses included:
-
-- IPv4: `142.251.142.142`
-- IPv6: `2a00:1450:4003:805::200e`
-
-## 4. Connectivity Test
-
-`Test-NetConnection google.com` confirmed successful connectivity.
+`Test-NetConnection google.com` returned:
 
 - Interface: `Wi-Fi`
 - Source address: `192.168.0.127`
-- Remote address: `142.251.142.142`
 - Ping: `True`
 - RTT: `54 ms`
 
-![DNS and Connectivity Tests](phase2-network-tests.png)
+![Windows Network Tests](phase2-network-tests.png)
+
+## Kali Linux
+
+### IP Configuration and Routing
+
+The active `eth0` interface had:
+
+- IPv4: `192.168.0.142/24`
+- State: `UP`
+- Default gateway: `192.168.0.1`
+
+### DNS Resolution
+
+`nslookup google.com` successfully resolved the domain.
+
+DNS server: `192.168.0.1`
+
+IPv4 address:
+
+`142.251.142.142`
+
+### TCP Connectivity
+
+TCP connectivity was tested with `nc`:
+
+- Port `443`: **Open**
+- Port `80`: **Open**
+- Port `22`: **Connection timed out**
+
+The port 22 result is documented as a timeout, not as proof that the port is closed.
+
+![Kali Network Tests](kali-phase2.png)
 
 ## Status
 
