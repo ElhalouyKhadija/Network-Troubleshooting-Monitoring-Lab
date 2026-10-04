@@ -2,11 +2,15 @@
 
 ## Objective
 
-Inspect active TCP listeners and established connections on Windows.
+Inspect TCP listening ports and active TCP connections on Windows and Kali Linux.
 
-## 1. Listening TCP Ports
+## Windows
 
-The Windows TCP listening ports were inspected using `Get-NetTCPConnection -State Listen`.
+### Listening TCP Ports
+
+The Windows TCP listening ports were inspected using:
+
+`Get-NetTCPConnection -State Listen`
 
 Several listening ports were identified, including:
 
@@ -15,9 +19,11 @@ Several listening ports were identified, including:
 - `5357`
 - Dynamic ports in the `49664–49669` range
 
-## 2. Established TCP Connections
+### Established TCP Connections
 
-Active TCP connections were inspected using `Get-NetTCPConnection -State Established`.
+Active TCP connections were inspected using:
+
+`Get-NetTCPConnection -State Established`
 
 Five established connections were reviewed.
 
@@ -26,13 +32,39 @@ The observed remote ports included:
 - `443` (HTTPS)
 - `80` (HTTP)
 
-The connections were associated with the `SearchApp` process in the captured output.
+The captured connections were associated with the `SearchApp` process.
 
-## 3. Process Identification
+![Windows TCP Connections](phase5-established-connections.png)
 
-The owning process of TCP connections can be identified using the `OwningProcess` PID and `Get-Process`.
+## Kali Linux
 
-![Established TCP Connections](phase5-established-connections.png)
+### Listening TCP Ports
+
+The command:
+
+`sudo ss -lntp`
+
+returned no TCP sockets in the `LISTEN` state at the time of the test.
+
+### Established TCP Connections
+
+The command:
+
+`ss -nt state established`
+
+returned no TCP connections in the `ESTABLISHED` state at the time of the test.
+
+### TCP Socket Check
+
+The command:
+
+`sudo ss -ntp`
+
+also returned no TCP sockets in the captured output.
+
+These results describe the TCP socket state observed at the time of testing.
+
+![Kali TCP Socket Status](kali-phase5.png)
 
 ## Status
 
