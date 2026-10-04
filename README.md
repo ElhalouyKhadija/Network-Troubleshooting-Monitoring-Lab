@@ -46,7 +46,8 @@ Network-Troubleshooting-Monitoring-Lab/
 ├── Phase-2/
 ├── Phase-3/
 ├── Phase-4/
-└── Phase-5/
+├── Phase-5/
+└── Phase-6/
 ```
 
 ## Phases
@@ -89,12 +90,12 @@ Results were compared between Windows and Kali Linux.
 
 Inspected firewall and packet-filtering configuration.
 
-Windows:
+**Windows:**
 
 * Firewall profiles
 * Enabled firewall rules
 
-Kali Linux:
+**Kali Linux:**
 
 * UFW availability
 * `nftables` rules
@@ -110,6 +111,21 @@ Inspected:
 * Associated processes where available
 
 Performed on Windows and Kali Linux.
+
+### Phase 6 – Documentation and Final Check
+
+Reviewed, organized, and documented the complete Network Troubleshooting & Monitoring Lab.
+
+The final review covered:
+
+* Network configuration and connectivity
+* IP addressing and routing
+* DNS troubleshooting
+* TCP connectivity and port testing
+* Firewall inspection
+* TCP connection monitoring
+* Windows and Kali Linux troubleshooting
+* Technical documentation and project organization
 
 ## Skills Demonstrated
 
@@ -129,4 +145,4 @@ Performed on Windows and Kali Linux.
 
 **Completed**
 
-The project contains practical test results, screenshots, and documentation for all five phases.
+The project contains practical test results, screenshots, and documentation covering all six phases.
