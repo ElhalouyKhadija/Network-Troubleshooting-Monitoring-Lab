@@ -1,10 +1,12 @@
-# Phase 4 – Windows Firewall Inspection
+# Phase 4 – Firewall Inspection
 
 ## Objective
 
-Inspect the Windows Firewall status and review the currently enabled firewall rules.
+Inspect firewall configuration and enabled filtering rules on Windows and Kali Linux.
 
-## 1. Firewall Profiles
+## Windows
+
+### Firewall Profiles
 
 The Windows Firewall profiles were inspected using `Get-NetFirewallProfile`.
 
@@ -14,15 +16,13 @@ All three profiles were enabled:
 - Private: `True`
 - Public: `True`
 
-## 2. Enabled Firewall Rules
+### Enabled Firewall Rules
 
-The number of enabled Windows Firewall rules was checked.
+A total of `239` enabled Windows Firewall rules were found.
 
-A total of `239` enabled firewall rules were found.
+### Firewall Rule Actions
 
-## 3. Firewall Rule Actions
-
-The enabled firewall rules were grouped by action.
+The enabled rules were grouped by action.
 
 The result showed:
 
@@ -31,6 +31,34 @@ The result showed:
 No enabled `Block` rules were returned by the tested query.
 
 ![Windows Firewall Status](phase4-firewall-status.png)
+
+## Kali Linux
+
+### UFW
+
+The `ufw` command was not available on the system.
+
+### nftables
+
+`sudo nft list ruleset` returned no rules.
+
+### iptables
+
+The current iptables configuration was inspected using:
+
+`sudo iptables -L -n -v`
+
+The three main chains had the following policies:
+
+- INPUT: `ACCEPT`
+- FORWARD: `ACCEPT`
+- OUTPUT: `ACCEPT`
+
+No additional iptables rules were listed in the captured output.
+
+These results describe the current filtering configuration observed during the test; they do not by themselves prove that the system has no firewall functionality.
+
+![Kali Firewall Status](kali-phase4.png)
 
 ## Status
 
