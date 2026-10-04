@@ -2,45 +2,70 @@
 
 ## Objective
 
-Test TCP connectivity to different ports on an external host and compare the results.
+Test TCP connectivity to different ports on an external host and compare the results on Windows and Kali Linux.
 
-## 1. HTTPS – Port 443
+## Windows
 
-A TCP connectivity test was performed against `google.com` on port `443`.
+### Port 443 – HTTPS
 
-The connection succeeded:
+`Test-NetConnection google.com -Port 443`
 
 - Remote port: `443`
 - Interface: `Wi-Fi`
 - Source address: `192.168.0.127`
 - TCP test: `True`
 
-## 2. HTTP – Port 80
+### Port 80 – HTTP
 
-A TCP connectivity test was performed against `google.com` on port `80`.
-
-The connection succeeded:
+`Test-NetConnection google.com -Port 80`
 
 - Remote port: `80`
 - Interface: `Wi-Fi`
 - Source address: `192.168.0.127`
 - TCP test: `True`
 
-## 3. SSH – Port 22
+### Port 22 – SSH
 
-A TCP connectivity test was performed against `google.com` on port `22`.
-
-The TCP connection failed:
+`Test-NetConnection google.com -Port 22`
 
 - Remote port: `22`
 - Interface: `Wi-Fi`
 - Source address: `192.168.0.127`
-- Ping: `True`
 - TCP test: `False`
 
-The test confirmed that ICMP connectivity to the resolved host was possible while the TCP connection attempt to port 22 failed.
+The TCP connection to port 22 failed during the test.
 
-![TCP Port Connectivity Tests](phase3-port-connectivity.png)
+![Windows TCP Port Tests](phase3-port-connectivity.png)
+
+## Kali Linux
+
+### Port 443 – HTTPS
+
+`nc -vz -w 3 google.com 443`
+
+Result:
+
+`443 (https) open`
+
+### Port 80 – HTTP
+
+`nc -vz -w 3 google.com 80`
+
+Result:
+
+`80 (http) open`
+
+### Port 22 – SSH
+
+`nc -vz -w 3 google.com 22`
+
+Result:
+
+`22 (ssh) Connection timed out`
+
+The port 22 result is documented as a timeout, not as proof that the port is closed.
+
+![Kali TCP Port Tests](kali-phase3.png)
 
 ## Status
 
